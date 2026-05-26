@@ -29,7 +29,6 @@ include = [
     "README.md",
     "./package.json",
     "perspective/**/*.py",
-    "perspective/extension",
     "perspective/templates",
     "perspective/tests/**/*.arrow",
     "./pyproject.toml",

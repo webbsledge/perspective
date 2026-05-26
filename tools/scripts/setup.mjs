@@ -179,6 +179,11 @@ async function focus_package() {
             value: "jupyterlab",
         },
         {
+            key: "a",
+            name: "@perspective-dev/anywidget",
+            value: "anywidget",
+        },
+        {
             key: "w",
             name: "@perspective-dev/workspace",
             value: "workspace",

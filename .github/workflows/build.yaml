@@ -559,7 +559,10 @@ jobs:
             - name: Build extension
               run: pnpm run build
               env:
-                  PACKAGE: "jupyterlab"
+                  # `anywidget` builds the widget bundle into the python static
+                  # dir; `jupyterlab` builds the renderers labextension. Order
+                  # matters: anywidget first so the static bundle exists.
+                  PACKAGE: "anywidget,jupyterlab"
 
             - run: node tools/scripts/repack_wheel.mjs
 

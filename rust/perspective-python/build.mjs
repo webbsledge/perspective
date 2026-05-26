@@ -99,7 +99,10 @@ if (build_wheel) {
         features.push(...standard_features);
     }
 
-    execSync(`${emsdk_prefix}maturin build ${flags} --features=${features.join(",")} ${target}`, { stdio: "inherit", env });
+    execSync(
+        `${emsdk_prefix}maturin build ${flags} --features=${features.join(",")} ${target}`,
+        { stdio: "inherit", env },
+    );
 }
 
 if (build_sdist) {
@@ -109,20 +112,22 @@ if (build_sdist) {
     const pyproject_toml = fs
         .readFileSync("./pyproject.toml")
         .toString("utf-8");
+
     const cargo = toml.parse(cargo_toml);
     const pyproject = toml.parse(pyproject_toml);
-
     const version = cargo["package"]["version"];
     const data_dir = `perspective_python-${version}.data`;
     const testfile = path.join(
         data_dir,
         "data/share/jupyter/labextensions/@perspective-dev/jupyterlab/package.json",
     );
+
     if (!fs.existsSync(testfile)) {
         throw new Error(
             "labextension is not present in data directory, please build `perspective-jupyterlab`",
         );
     }
+
     const readme_md = fs.readFileSync("./README.md");
     const pkg_info = generatePkgInfo(pyproject, cargo, readme_md);
     fs.writeFileSync("./PKG-INFO", pkg_info);
